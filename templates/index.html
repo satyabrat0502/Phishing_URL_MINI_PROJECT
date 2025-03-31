@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="This website is developed to identify the safety of a URL." />
+	<meta name="keywords" content="phishing url,phishing,cyber security,machine learning,classifier,python" />
+	<meta name="author" content="Srijan Singh Somvanshi" />
+
+	<!-- BootStrap -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+		crossorigin="anonymous" />
+	<link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet" />
+	<title>URL Detection</title>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="form col-md" id="form1">
+				<h2>PHISHING URL DETECTION</h2>
+				<br />
+				<form action="/" method="post">
+					<input type="text" class="form__input" name="url" id="url" placeholder="Enter URL" required />
+					<label for="url" class="form__label">URL</label>
+					<button class="button" role="button">Check here</button>
+				</form>
+			</div>
+
+			<div class="col-md" id="form2">
+				<br />
+				<h6 class="right">
+					<a href="{{ url }}" target="_blank">{{ url }}</a>
+				</h6>
+				<br />
+				<h3 id="prediction">{{ prediction_text }}</h3>
+				<button class="button2" id="button2" role="button" onclick="window.open('{{ url }}')"
+					style="display: none;">Still want to Continue</button>
+				<button class="button1" id="button1" role="button" onclick="window.open('{{ url }}')"
+					style="display: none;">Continue</button>
+			</div>
+		</div>
+		<br />
+	</div>
+
+	<!-- JavaScript -->
+	<script>
+		let x = parseFloat("{{ xx }}") || 0;
+		let num = x * 100;
+		if (0 <= x && x < 0.5) {
+			num = 100 - num;
+		}
+		let txtx = num.toFixed(2).toString();
+		if (x <= 1 && x >= 0.5) {
+			document.getElementById("prediction").innerHTML = "Website is " + txtx + "% safe to use...";
+			document.getElementById("button1").style.display = "block";
+		} else if (0 <= x && x < 0.5) {
+			document.getElementById("prediction").innerHTML = "Website is " + txtx + "% unsafe to use...";
+			document.getElementById("button2").style.display = "block";
+		}
+	</script>
+</body>
+
+</html>
